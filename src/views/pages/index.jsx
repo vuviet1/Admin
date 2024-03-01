@@ -52,7 +52,7 @@ function Index() {
                 s +
                 " giây ";
         }
-rethjufghmuhrty
+
         // Dùng hàm setTimeout để thiết lập gọi lại 0.5 giây / lần
         var t = setTimeout(function () {
             startTime();

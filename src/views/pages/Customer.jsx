@@ -7,4 +7,3 @@ const Customer = (props) => (
 );
 
 export default Customer;
-trhytnfgnty
