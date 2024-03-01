@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Dashboard - SB Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet"/>
+    <link href="../../css/styles.css" rel="stylesheet"/>
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+</head>
+<body class="sb-nav-fixed" onload="startTime()">
+<!--        Header-->
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <!-- Navbar Brand-->
+    <a class="navbar-brand ps-3" href="index.html" style="text-align: center">Admin</a>
+    <!-- Sidebar Toggle-->
+    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
+            class="fas fa-bars"></i></button>
+    <!-- Navbar Search-->
+    <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+<!--        <div class="input-group">-->
+<!--            <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..."-->
+<!--                   aria-describedby="btnNavbarSearch"/>-->
+<!--            <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>-->
+<!--        </div>-->
+    </form>
+    <!-- Navbar-->
+    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+        <li class="nav-item dropdown">
+            <a class="nav-link" href="../login.html">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            </a>
+        </li>
+    </ul>
+</nav>
+<!--        End Header -->
+
+<div id="layoutSidenav">
+
+    <!--            Nav-->
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">Core</div>
+                    <a class="nav-link" href="index.html">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Bảng điều khiển
+                    </a>
+                    <div class="sb-sidenav-menu-heading">Quản lý</div>
+                    <a class="nav-link" href="Employee.html">
+                        <div class="sb-nav-link-icon"><i class="fa-regular fa-address-card"></i></div>
+                        Quản lý nhân viên
+                    </a>
+                    <a class="nav-link" href="Customer.html">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
+                        Quản lý khách hàng
+                    </a>
+                    <a class="nav-link" href="Category.html">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-layer-group"></i></div>
+                        Quản lý danh mục
+                    </a>
+                    <a class="nav-link" href="Book.html">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-book-open"></i></div>
+                        Quản lý sách
+                    </a>
+                    <a class="nav-link" href="Order.html">
+                        <div class="sb-nav-link-icon"><i class="fa-regular fa-calendar-check"></i></div>
+                        Quản lý đơn hàng
+                    </a>
+                    <a class="nav-link" href="Payment.html">
+                        <div class="sb-nav-link-icon"><i class="fa-brands fa-paypal"></i></div>
+                        Quản lý PTTT
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!--            End Nav-->
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">Quản lý thông tin đơn hàng</h1>
+                <div class="card border-left-primary shadow h-100 py-1"
+                     style="border-left: 0.25rem solid orange !important; text-align: center; margin-top: 10px;">
+                    <ol class="breadcrumb mb-2">
+                        <li class="breadcrumb-item active"
+                            style="display: flex; justify-content: space-between; align-items: center; margin-left: 10px;">
+                            <div>Bảng điều khiển</div>
+                            <div></div>
+                            <div style="margin-left: 750px;">
+                                <div id="current-time"></div>
+                                <div>
+                                    <div id="timer"></div>
+                                </div>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+
+
+                <div style="margin-top: 10px"></div>
+
+                <main>
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <div style="display: flex; justify-content: space-between">
+                                <div style="margin-top: 5px">
+                                    <i class="fa-solid fa-receipt"></i>
+                                    Đơn hàng
+                                </div>
+
+                                <div>
+                                    <button type="button" class="btn btn-primary add-payment" data-bs-toggle="modal"
+                                            data-bs-target="#add_order">
+                                        <i class="fa-solid fa-plus"></i>
+                                        Thêm đơn hàng
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card-body">
+                            <table id="datatablesSimple">
+                                <thead>
+                                <tr>
+                                    <th>Tên khách hàng</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Trạng thái</th>
+                                    <th>Hành động</th>
+                                </tr>
+                                </thead>
+                                <tfoot>
+                                <tr>
+                                    <th>Tên khách hàng</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Trạng thái</th>
+                                    <th>Hành động</th>
+                                </tr>
+                                </tfoot>
+                                <tbody>
+                                <tr>
+                                    <td>Sdghb</td>
+                                    <td>111111111</td>
+                                    <td>Chờ duyệt</td>
+                                    <td>
+                                        <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                                data-bs-target="#details_order">
+                                            <i class="fa-solid fa-circle-info" style="color: white"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                                data-bs-target="#edit_order">
+                                            <i class="fa-regular fa-pen-to-square"></i>
+                                        </button>
+                                        <button class="btn btn-danger">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>Bdsf</td>
+                                    <td>222222222</td>
+                                    <td>Chờ duyệt</td>
+                                    <td>
+                                        <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                                data-bs-target="#details_order">
+                                            <i class="fa-solid fa-circle-info" style="color: white"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                                data-bs-target="#edit_order">
+                                            <i class="fa-regular fa-pen-to-square"></i>
+                                        </button>
+                                        <button class="btn btn-danger">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Cetrg</td>
+                                    <td>33333333333</td>
+                                    <td>Chờ duyệt</td>
+                                    <td>
+                                        <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                                data-bs-target="#details_order">
+                                            <i class="fa-solid fa-circle-info" style="color: white"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                                data-bs-target="#edit_order">
+                                            <i class="fa-regular fa-pen-to-square"></i>
+                                        </button>
+                                        <button class="btn btn-danger">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </main>
+
+            </div>
+        </main>
+
+        <!--                Footer-->
+        <footer class="py-4 bg-light mt-auto">
+            <div class="container-fluid px-4">
+                <div class="d-flex align-items-center justify-content-between small">
+                    <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                </div>
+            </div>
+        </footer>
+
+        <!--                End Footer-->
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+<script src="../../js/scripts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+<script src="../../assets/demo/chart-area-demo.js"></script>
+<script src="../../assets/demo/chart-bar-demo.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+        crossorigin="anonymous"></script>
+<script src="../../js/datatables-simple-demo.js"></script>
+
+<script>
+    // Hàm khởi tạo đồng hồ
+    function startTime()
+    {
+        // Lấy Object ngày hiện tại
+        var today = new Date();
+
+        // Giờ, phút, giây hiện tại
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+
+        // Ngày hiện tại
+        var curDay = today.getDate();
+
+        // Tháng hiện tại
+        var curMonth = today.getMonth() + 1;
+
+        // Năm hiện tại
+        var curYear = today.getFullYear();
+
+        var curDw = today.getDay();
+
+        // Chuyển đổi sang dạng 01, 02, 03
+        m = checkTime(m);
+        s = checkTime(s);
+
+        // Ghi ra trình duyệt
+        document.getElementById('timer').innerHTML = "Thứ " + curDw + ", " + curDay + "/" + curMonth + "/" + curYear + "    -   " + h + " giờ " + m + " phút " + s + " giây ";
+
+        // Dùng hàm setTimeout để thiết lập gọi lại 0.5 giây / lần
+        var t = setTimeout(function() {
+            startTime();
+        }, 500);
+    }
+
+    // Hàm này có tác dụng chuyển những số bé hơn 10 thành dạng 01, 02, 03, ...
+    function checkTime(i)
+    {
+        if (i < 10) {
+            i = "0" + i;
+        }
+        return i;
+    }
+</script>
+
+
+<div class="modal fade" id="edit_order" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="editBackdropLabel">Cập nhật thông tin đơn hàng</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="id_order_edit">
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Tên khách hàng</label>
+                    <input type="text" class="form-control" id="phone">
+                </div>
+                <div class="mb-3">
+                    <label for="name_em_edit" class="form-label">Địa chỉ nhận hàng</label>
+                    <input type="text" class="form-control" id="name_em_edit">
+                </div>
+                <div class="mb-3">
+                    <label for="cate" class="form-label">Số điện thoại</label>
+                    <input type="text" class="form-control" id="cate">
+                </div>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Trạng thái</option>
+                    <option value="1">Chờ duyệt</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy bỏ</button>
+                <button type="button" class="btn btn-primary">Cập nhật</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="add_order" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="addBackdropLabel">Thêm đơn hàng mới</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="id_order_add">
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Tên khách hàng</label>
+                    <input type="text" class="form-control" id="phone1">
+                </div>
+                <div class="mb-3">
+                    <label for="name_em_edit" class="form-label">Địa chỉ nhận hàng</label>
+                    <input type="text" class="form-control" id="name_em_edit1">
+                </div>
+                <div class="mb-3">
+                    <label for="cate" class="form-label">Số điện thoại</label>
+                    <input type="text" class="form-control" id="cate1">
+                </div>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Trạng thái</option>
+                    <option value="1">Chờ duyệt</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy bỏ</button>
+                <button type="button" class="btn btn-primary">Thêm mới</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="details_order" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="detailsBackdropLabel">Thông tin chi tiết</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="id_order_add">
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Tên khách hàng</label>
+                    <input type="text" class="form-control" id="phone1">
+                </div>
+                <div class="mb-3">
+                    <label for="name_em_edit" class="form-label">Địa chỉ nhận hàng</label>
+                    <input type="text" class="form-control" id="name_em_edit1">
+                </div>
+                <div class="mb-3">
+                    <label for="cate" class="form-label">Số điện thoại</label>
+                    <input type="text" class="form-control" id="cate1">
+                </div>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Trạng thái</option>
+                    <option value="1">Chờ duyệt</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy bỏ</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
