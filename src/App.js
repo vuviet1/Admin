@@ -1,10 +1,12 @@
 import './App.css';
-import Index from './views/pages/index';
-import Category from "./views/pages/Category";
-import Customer from "./views/pages/Customer";
-import Employee from "./views/pages/Employee";
-import Order from "./views/pages/Order";
-import Payment from "./views/pages/Payment";
+import Index from './views/pages/home';
+import Category from "./views/pages/Category/Category";
+import Customer from "./views/pages/Customer/Customer";
+import Employee from "./views/pages/Employee/Employee";
+import Order from "./views/pages/Order/Order";
+import Payment from "./views/pages/Payment/Payment";
+import Book from "./views/pages/Book/Book";
+import Login from "./views/login";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 function App() {
@@ -17,6 +19,8 @@ function App() {
           <Route path="/customer" element={<Customer />}  />
           <Route path="/order" element={<Order />}  />
           <Route path="/payment" element={<Payment />}  />
+          <Route path="/book" element={<Book />}  />
+          <Route path="/login" element={<Login />}  />
       </Routes>
     </BrowserRouter>
   );

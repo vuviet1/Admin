@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
-import Header from "../components/header";
-import Navbar from "../components/nav";
-import Footer from "../components/footer";
+import Header from "../../components/header";
+import Navbar from "../../components/nav";
+import Footer from "../../components/footer";
 import Chart from "chart.js/auto";
 
 function Index() {

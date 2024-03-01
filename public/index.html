@@ -35,7 +35,7 @@
     -->
     <title>React App</title>
   </head>
-  <body class="sb-nav-fixed" onload="startTime()">
+  <body class="sb-nav-fixed">
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--
@@ -61,49 +61,6 @@
             crossorigin="anonymous"></script>
     <script src="./js/datatables-simple-demo.js"></script>
 
-    <script>
-      // Hàm khởi tạo đồng hồ
-      function startTime() {
-        // Lấy Object ngày hiện tại
-        var today = new Date();
-
-        // Giờ, phút, giây hiện tại
-        var h = today.getHours();
-        var m = today.getMinutes();
-        var s = today.getSeconds();
-
-        // Ngày hiện tại
-        var curDay = today.getDate();
-
-        // Tháng hiện tại
-        var curMonth = today.getMonth() + 1;
-
-        // Năm hiện tại
-        var curYear = today.getFullYear();
-
-        var curDw = today.getDay();
-
-        // Chuyển đổi sang dạng 01, 02, 03
-        m = checkTime(m);
-        s = checkTime(s);
-
-        // Ghi ra trình duyệt
-        document.getElementById('timer').innerHTML = "Thứ " + curDw + ", " + curDay + "/" + curMonth + "/" + curYear + "    -   " + h + " giờ " + m + " phút " + s + " giây ";
-
-        // Dùng hàm setTimeout để thiết lập gọi lại 0.5 giây / lần
-        var t = setTimeout(function () {
-          startTime();
-        }, 500);
-      }
-
-      // Hàm này có tác dụng chuyển những số bé hơn 10 thành dạng 01, 02, 03, ...
-      function checkTime(i) {
-        if (i < 10) {
-          i = "0" + i;
-        }
-        return i;
-      }
-    </script>
 <!--  -->
   </body>
 </html>
